@@ -1,42 +1,37 @@
-// src/App.jsx
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Home from "./pages/Home";
-import MemoriasArenaBR from "./pages/MemoriasArenaBR";
-import JogadoresHistoricos from "./pages/JogadoresHistoricos";
-import Patrocinadores from "./pages/Patrocinadores";
-import Noticias from "./pages/Noticias";
-import Radios from "./pages/Radios";
-import Videos from "./pages/Videos";
-import Login from "./pages/Login";
-import PainelAdmin from "./pages/PainelAdmin";
-import RotaPrivada from "./components/RotaPrivada";
+document.addEventListener("DOMContentLoaded", function () {
+  const resultadosDiv = document.getElementById('resultados');
+  const memoriasDiv = document.getElementById('memorias');
+  const loadMemoriasButton = document.getElementById('loadMemorias');
 
-export default function App() {
-  return (
-    <Router>
-      <nav className="bg-gray-900 text-white p-4 flex gap-4 justify-center text-sm">
-        <Link to="/">🏠 Início</Link>
-        <Link to="/memorias">📖 Memórias</Link>
-        <Link to="/jogadores">⭐ Jogadores</Link>
-        <Link to="/patrocinadores">💼 Patrocinadores</Link>
-        <Link to="/noticias">📰 Notícias</Link>
-        <Link to="/radios">📻 Rádios</Link>
-        <Link to="/videos">🎥 Vídeos</Link>
-        <Link to="/login">🔐 Admin</Link>
-      </nav>
+  // Função que simula a obtenção de resultados de jogos
+  function carregarResultados() {
+    const resultados = [
+      "Futebol: Time A 3 x 1 Time B",
+      "Futebol: Time C 0 x 2 Time D",
+      "Futebol: Time E 1 x 1 Time F"
+    ];
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/radios" element={<Radios />} />
-        <Route path="/login" element={<Login />} />
+    resultadosDiv.innerHTML = resultados
+      .map(resultado => `<p>${resultado}</p>`)
+      .join("");
+  }
 
-        <Route path="/painel-admin" element={<RotaPrivada><PainelAdmin /></RotaPrivada>} />
-        <Route path="/memorias" element={<RotaPrivada><MemoriasArenaBR /></RotaPrivada>} />
-        <Route path="/jogadores" element={<RotaPrivada><JogadoresHistoricos /></RotaPrivada>} />
-        <Route path="/patrocinadores" element={<RotaPrivada><Patrocinadores /></RotaPrivada>} />
-        <Route path="/noticias" element={<RotaPrivada><Noticias /></RotaPrivada>} />
-        <Route path="/videos" element={<RotaPrivada><Videos /></RotaPrivada>} />
-      </Routes>
-    </Router>
-  );
-}
+  // Função que simula a obtenção de memórias históricas do futebol
+  function carregarMemorias() {
+    const memorias = [
+      "A primeira Copa do Mundo foi em 1930 no Uruguai.",
+      "Pelé é considerado o maior jogador de futebol de todos os tempos.",
+      "A final da Copa de 1998 teve um grande impacto no futebol brasileiro."
+    ];
+
+    memoriasDiv.innerHTML = memorias
+      .map(memoria => `<p>${memoria}</p>`)
+      .join("");
+  }
+
+  // Carregar resultados assim que a página carregar
+  carregarResultados();
+
+  // Adicionar funcionalidade ao botão para carregar memórias
+  loadMemoriasButton.addEventListener('click', carregarMemorias);
+});
