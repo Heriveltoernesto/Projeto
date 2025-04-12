@@ -4,30 +4,40 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ArenaFutebolBR</title>
-  <link rel="stylesheet" href="styles.css"> <!-- Se houver um arquivo CSS -->
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header>
-    <h1>Bem-vindo ao ArenaFutebolBR!</h1>
+    <div class="container">
+      <h1>Bem-vindo ao ArenaFutebolBR!</h1>
+      <p>Acompanhe os resultados e as memórias do futebol!</p>
+    </div>
   </header>
-  
+
   <main>
-    <section>
-      <h2>Últimos Resultados</h2>
-      <div id="resultados">
-        <!-- Os resultados serão carregados aqui -->
-      </div>
-    </section>
-    <section>
-      <h2>Memórias Arena BR</h2>
-      <p>Veja histórias emocionantes do futebol!</p>
-    </section>
+    <div class="container">
+      <section class="section">
+        <h2>Últimos Resultados</h2>
+        <div id="resultados" class="resultados">
+          <!-- Os resultados serão carregados dinamicamente aqui -->
+        </div>
+      </section>
+      
+      <section class="section">
+        <h2>Memórias Arena BR</h2>
+        <p>Veja histórias emocionantes do futebol!</p>
+        <button id="loadMemorias">Carregar Memórias</button>
+        <div id="memorias" class="memorias"></div>
+      </section>
+    </div>
   </main>
 
   <footer>
-    <p>&copy; 2025 ArenaFutebolBR. Todos os direitos reservados.</p>
+    <div class="container">
+      <p>&copy; 2025 ArenaFutebolBR. Todos os direitos reservados.</p>
+    </div>
   </footer>
 
-  <script src="app.js"></script> <!-- Se houver scripts JavaScript -->
+  <script src="app.js"></script>
 </body>
 </html>
