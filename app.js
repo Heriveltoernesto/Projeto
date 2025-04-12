@@ -1,2 +1,2 @@
-// Conteúdo do arquivo index.js
+// Conteúdo do arquivo app.js
 // Código do site ArenaFutebolBR
