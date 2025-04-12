@@ -1,43 +1,38 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ArenaFutebolBR</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <header>
-    <div class="container">
-      <h1>Bem-vindo ao ArenaFutebolBR!</h1>
-      <p>Acompanhe os resultados e as memórias do futebol!</p>
-    </div>
-  </header>
+// app.js
 
-  <main>
-    <div class="container">
-      <section class="section">
-        <h2>Últimos Resultados</h2>
-        <div id="resultados" class="resultados">
-          <!-- Os resultados serão carregados dinamicamente aqui -->
-        </div>
-      </section>
-      
-      <section class="section">
-        <h2>Memórias Arena BR</h2>
-        <p>Veja histórias emocionantes do futebol!</p>
-        <button id="loadMemorias">Carregar Memórias</button>
-        <div id="memorias" class="memorias"></div>
-      </section>
-    </div>
-  </main>
+document.addEventListener("DOMContentLoaded", function() {
+  const resultadosDiv = document.getElementById('resultados');
+  const memoriasDiv = document.getElementById('memorias');
+  const loadMemoriasButton = document.getElementById('loadMemorias');
 
-  <footer>
-    <div class="container">
-      <p>&copy; 2025 ArenaFutebolBR. Todos os direitos reservados.</p>
-    </div>
-  </footer>
+  // Função que simula a obtenção de resultados de jogos
+  function carregarResultados() {
+    const resultados = [
+      "Futebol: Time A 3 x 1 Time B",
+      "Futebol: Time C 0 x 2 Time D",
+      "Futebol: Time E 1 x 1 Time F"
+    ];
 
-  <script src="app.js"></script>
-</body>
-</html>
+    resultadosDiv.innerHTML = resultados.map(resultado => `<p>${resultado}</p>`).join("");
+  }
+
+  // Função que simula a obtenção de memórias históricas do futebol
+  function carregarMemorias() {
+    const memorias = [
+      "A primeira Copa do Mundo foi em 1930 no Uruguai.",
+      "Pelé é considerado o maior jogador de futebol de todos os tempos.",
+      "A final da Copa de 1998 teve um grande impacto no futebol brasileiro."
+    ];
+
+    memoriasDiv.innerHTML = memorias.map(memoria => `<p>${memoria}</p>`).join("");
+  }
+
+  // Carregar resultados assim que a página carregar
+  carregarResultados();
+
+  // Adicionar funcionalidade ao botão para carregar memórias
+  loadMemoriasButton.addEventListener('click', function() {
+    carregarMemorias();
+  });
+});
+
