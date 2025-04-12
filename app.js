@@ -1,37 +1,84 @@
-// app.js
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-document.addEventListener("DOMContentLoaded", function() {
-  const resultadosDiv = document.getElementById('resultados');
-  const memoriasDiv = document.getElementById('memorias');
-  const loadMemoriasButton = document.getElementById('loadMemorias');
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+}
 
-  // Função que simula a obtenção de resultados de jogos
-  function carregarResultados() {
-    const resultados = [
-      "Futebol: Time A 3 x 1 Time B",
-      "Futebol: Time C 0 x 2 Time D",
-      "Futebol: Time E 1 x 1 Time F"
-    ];
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
 
-    resultadosDiv.innerHTML = resultados.map(resultado => `<p>${resultado}</p>`).join("");
-  }
+header {
+  background-color: #1e2a38;
+  color: white;
+  padding: 50px 0;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
 
-  // Função que simula a obtenção de memórias históricas do futebol
-  function carregarMemorias() {
-    const memorias = [
-      "A primeira Copa do Mundo foi em 1930 no Uruguai.",
-      "Pelé é considerado o maior jogador de futebol de todos os tempos.",
-      "A final da Copa de 1998 teve um grande impacto no futebol brasileiro."
-    ];
+header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
 
-    memoriasDiv.innerHTML = memorias.map(memoria => `<p>${memoria}</p>`).join("");
-  }
+header p {
+  font-size: 1.2rem;
+}
 
-  // Carregar resultados assim que a página carregar
-  carregarResultados();
+section {
+  background-color: white;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
 
-  // Adicionar funcionalidade ao botão para carregar memórias
-  loadMemoriasButton.addEventListener('click', function() {
-    carregarMemorias();
-  });
-});
+h2 {
+  font-size: 1.8rem;
+  color: #2d3b49;
+  margin-bottom: 15px;
+}
+
+button {
+  background-color: #ff6f61;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #e55b4f;
+}
+
+.resultados {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.memorias {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  line-height: 1.8;
+}
+
+footer {
+  background-color: #1e2a38;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+}
