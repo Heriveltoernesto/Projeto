@@ -1,0 +1,84 @@
+// src/pages/Patrocinadores.jsx
+import { useEffect, useState } from "react";
+import { collection, getDocs, addDoc, deleteDoc, doc, updateDoc } from "firebase/firestore";
+import { db } from "../firebaseConfig";
+
+export default function Patrocinadores() {
+  const [patrocinadores, setPatrocinadores] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [form, setForm] = useState({ nome: '', descricao: '', imagem: '', link: '' });
+  const [editandoId, setEditandoId] = useState(null);
+  const [enviando, setEnviando] = useState(false);
+
+  useEffect(() => {
+    const fetchPatrocinadores = async () => {
+      const querySnapshot = await getDocs(collection(db, "patrocinadores"));
+      const dados = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      setPatrocinadores(dados);
+      setLoading(false);
+    };
+    fetchPatrocinadores();
+  }, [enviando]);
+
+  const enviarPatrocinador = async (e) => {
+    e.preventDefault();
+    setEnviando(true);
+    if (editandoId) {
+      await updateDoc(doc(db, "patrocinadores", editandoId), form);
+      setEditandoId(null);
+    } else {
+      await addDoc(collection(db, "patrocinadores"), form);
+    }
+    setForm({ nome: '', descricao: '', imagem: '', link: '' });
+    setEnviando(false);
+  };
+
+  const editarPatrocinador = (p) => {
+    setForm({ nome: p.nome, descricao: p.descricao, imagem: p.imagem, link: p.link });
+    setEditandoId(p.id);
+  };
+
+  const excluirPatrocinador = async (id) => {
+    if (confirm("Deseja excluir este patrocinador?")) {
+      await deleteDoc(doc(db, "patrocinadores", id));
+      setEnviando(true);
+      setTimeout(() => setEnviando(false), 500);
+    }
+  };
+
+  return (
+    <div className="p-6 bg-white min-h-screen">
+      <h1 className="text-3xl font-bold text-center text-gray-800 mb-4">Painel de Patrocinadores</h1>
+      <p className="text-center text-gray-500 mb-8">Gerencie seus apoiadores e marcas parceiras</p>
+
+      <form onSubmit={enviarPatrocinador} className="space-y-4 max-w-xl mx-auto mb-10">
+        <input type="text" placeholder="Nome" className="w-full p-2 border rounded" value={form.nome} onChange={e => setForm({...form, nome: e.target.value})} required />
+        <textarea placeholder="Descrição" className="w-full p-2 border rounded" value={form.descricao} onChange={e => setForm({...form, descricao: e.target.value})} required />
+        <input type="url" placeholder="Link (site ou promoção)" className="w-full p-2 border rounded" value={form.link} onChange={e => setForm({...form, link: e.target.value})} required />
+        <input type="url" placeholder="URL da Imagem ou Logo" className="w-full p-2 border rounded" value={form.imagem} onChange={e => setForm({...form, imagem: e.target.value})} required />
+        <button disabled={enviando} type="submit" className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+          {enviando ? (editandoId ? 'Atualizando...' : 'Enviando...') : (editandoId ? 'Atualizar Patrocinador' : 'Adicionar Patrocinador')}
+        </button>
+      </form>
+
+      {loading ? (
+        <p className="text-center text-gray-500">Carregando patrocinadores...</p>
+      ) : (
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {patrocinadores.map((p) => (
+            <div key={p.id} className="border rounded-xl p-4 shadow bg-gray-50">
+              <img src={p.imagem} alt={p.nome} className="w-full h-32 object-contain mb-2" />
+              <h2 className="text-xl font-bold text-gray-800">{p.nome}</h2>
+              <p className="text-gray-600 text-sm mb-2">{p.descricao}</p>
+              <a href={p.link} target="_blank" className="text-blue-600 underline text-sm">Acessar link</a>
+              <div className="mt-4 flex gap-2">
+                <button onClick={() => editarPatrocinador(p)} className="bg-blue-500 text-white px-3 py-1 rounded">Editar</button>
+                <button onClick={() => excluirPatrocinador(p.id)} className="bg-red-500 text-white px-3 py-1 rounded">Excluir</button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
