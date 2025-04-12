@@ -1,2 +1,14 @@
-// Conteúdo do arquivo package.json
-// Código do site ArenaFutebolBR
+{
+  "name": "ArenaFutebolBR",
+  "version": "1.0.0",
+  "description": "Projeto ArenaFutebolBR",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "firebase-admin": "^10.0.0",
+    "mongodb": "^4.0.0"
+  }
+}
